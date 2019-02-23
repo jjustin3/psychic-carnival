@@ -1,16 +1,20 @@
 import React from 'react'
 import axios from 'axios'
 
+import SearchBar from "./SearchBar";
+
 class MapList extends React.Component{
-    onSearchSubmit(term){
-        axios.get('https://skimap.org/Regions/view/', {
+    async onSearchSubmit(term){
+        const response = await axios.get('https://skimap.org/Regions/view/', {
         params: {term}
-        })
-        console.log(term)
+        }).then(response =>{console.log(response.data.results)})
+
     }
 
     render(){
-        return <div>hi</div>
+        return <div>
+            <SearchBar onSubmit ={this.onSearchSubmit()}/>
+        </div>
     }
 
 };
